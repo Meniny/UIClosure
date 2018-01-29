@@ -17,12 +17,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.onTap(taps: 1, touches: 1) { (tap) in
-            self.label.text = "self.view.onTap"
+        self.label.isUserInteractionEnabled = true
+        self.label.onTap(taps: 1, touches: 1) { (tap) in
+            self.label.text = "self.label.onTap"
         }
         
-        self.label.onLongPress(taps: 1, touches: 1, minDuration: 1, allowableMovement: 20) { (longpress) in
-            self.label.text = "self.label.onLongPress"
+        self.view.onLongPress() { (longpress) in
+            self.label.text = "self.view.onLongPress"
         }
         
         self.field.onChange { (text) in
