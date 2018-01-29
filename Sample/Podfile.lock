@@ -1,0 +1,16 @@
+PODS:
+  - UIClosure (1.0.0)
+
+DEPENDENCIES:
+  - UIClosure (from `../`)
+
+EXTERNAL SOURCES:
+  UIClosure:
+    :path: ../
+
+SPEC CHECKSUMS:
+  UIClosure: 93b3cbad26d4c319d7a8fe77bb92133e6c7c7979
+
+PODFILE CHECKSUM: 9d9cbbf0ba50adc66e1cc4d8a9163691c6e71132
+
+COCOAPODS: 1.4.0
