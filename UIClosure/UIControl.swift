@@ -204,7 +204,7 @@ extension UIControl {
     }
 }
 
-extension UIButton {
+extension UIAppearance where Self: UIButton {
     // MARK: Common Events
     /**
      A convenience method wrapping a typical use for UIButton's
@@ -224,15 +224,15 @@ extension UIButton {
      * returns: itself so you can daisy chain the other event handler calls
      */
     @discardableResult
-    public func onTap(handler: @escaping () -> Void) -> Self {
+    public func onTap(handler: @escaping (_ field: Self) -> Void) -> Self {
         on(.touchUpInside) { _,_ in
-            handler()
+            handler(self)
         }
         return self
     }
 }
 
-extension UITextField {
+extension UIAppearance where Self: UITextField {
     // MARK: Common Events
     /**
      A convenience method wrapping a typical use for UITextField's
@@ -258,13 +258,13 @@ extension UITextField {
      * returns: itself so you can daisy chain the other event handler calls
      */
     @discardableResult
-    public func onChange(handler: @escaping (_ text: String) -> Void) -> Self {
+    public func onChange(handler: @escaping (_ text: String, _ field: Self) -> Void) -> Self {
         on(.editingChanged) { sender, _ in
-            guard let textField = sender as? UITextField, let text = textField.text else {
-                handler("")
+            guard let textField = sender as? Self, let text = textField.text else {
+                handler("", self)
                 return
             }
-            handler(text)
+            handler(text, textField)
         }
         return self
     }
@@ -278,9 +278,13 @@ extension UITextField {
      * returns: itself so you can daisy chain the other event handler calls
      */
     @discardableResult
-    public func onEditingEnded(handler: @escaping () -> Void) -> Self {
-        on(.editingDidEnd) { _,_ in
-            handler()
+    public func onEditingEnded(handler: @escaping (_ field: Self) -> Void) -> Self {
+        on(.editingDidEnd) { sender,_ in
+            guard let textField = sender as? Self else {
+                handler(self)
+                return
+            }
+            handler(textField)
         }
         return self
     }
@@ -294,9 +298,13 @@ extension UITextField {
      * returns: itself so you can daisy chain the other event handler calls
      */
     @discardableResult
-    public func onEditingBegan(handler: @escaping () -> Void) -> Self {
-        on(.editingDidBegin) { _,_ in
-            handler()
+    public func onEditingBegan(handler: @escaping (_ field: Self) -> Void) -> Self {
+        on(.editingDidBegin) { sender,_ in
+            guard let textField = sender as? Self else {
+                handler(self)
+                return
+            }
+            handler(textField)
         }
         return self
     }
@@ -310,15 +318,19 @@ extension UITextField {
      * returns: itself so you can daisy chain the other event handler calls
      */
     @discardableResult
-    public func onReturn(handler: @escaping () -> Void) -> Self {
-        on(.editingDidEndOnExit) { _,_ in
-            handler()
+    public func onReturn(handler: @escaping (_ field: Self) -> Void) -> Self {
+        on(.editingDidEndOnExit) { sender,_ in
+            guard let textField = sender as? Self else {
+                handler(self)
+                return
+            }
+            handler(textField)
         }
         return self
     }
 }
 
-extension UITextField {
+extension UIAppearance where Self: UITextField {
     // MARK: Delegate Overrides
     /**
      This method determines if the text field should begin editing. This is equivalent 
@@ -329,8 +341,8 @@ extension UITextField {
      * returns: Returns itself so you can daisy chain the other delegate calls
      */
     @discardableResult
-    public func shouldBeginEditing(handler: @escaping () -> Bool) -> Self {
-        return update { $0.shouldBeginEditing = handler }
+    public func shouldBeginEditing(handler: @escaping (_ field: Self) -> Bool) -> Self {
+        return update { $0.shouldBeginEditing = { handler(self) } }
     }
     
     /**
@@ -342,8 +354,8 @@ extension UITextField {
      * returns: Returns itself so you can daisy chain the other delegate calls
      */
     @discardableResult
-    public func didBeginEditing(handler: @escaping () -> Void) -> Self {
-        return update { $0.didBeginEditing = handler }
+    public func didBeginEditing(handler: @escaping (_ field: Self) -> Void) -> Self {
+        return update { $0.didBeginEditing = { handler(self) } }
     }
     
     /**
@@ -355,8 +367,8 @@ extension UITextField {
      * returns: Returns itself so you can daisy chain the other delegate calls
      */
     @discardableResult
-    public func shouldEndEditing(handler: @escaping () -> Bool) -> Self {
-        return update { $0.shouldEndEditing = handler }
+    public func shouldEndEditing(handler: @escaping (_ field: Self) -> Bool) -> Self {
+        return update { $0.shouldEndEditing = { handler(self) } }
     }
     
     /**
@@ -368,8 +380,8 @@ extension UITextField {
      * returns: Returns itself so you can daisy chain the other delegate calls
      */
     @discardableResult
-    public func didEndEditing(handler: @escaping () -> Void) -> Self {
-        return update { $0.didEndEditing = handler }
+    public func didEndEditing(handler: @escaping (_ field: Self) -> Void) -> Self {
+        return update { $0.didEndEditing = { handler(self) } }
     }
     
     /**
@@ -420,8 +432,8 @@ extension UITextField {
      * returns: Returns itself so you can daisy chain the other delegate calls
      */
     @discardableResult
-    public func shouldClear(handler: @escaping () -> Bool) -> Self {
-        return update { $0.shouldClear = handler }
+    public func shouldClear(handler: @escaping (_ field: Self) -> Bool) -> Self {
+        return update { $0.shouldClear = { handler(self) } }
     }
     
     /**
@@ -433,8 +445,8 @@ extension UITextField {
      * returns: Returns itself so you can daisy chain the other delegate calls
      */
     @discardableResult
-    public func shouldReturn(handler: @escaping () -> Bool) -> Self {
-        return update { $0.shouldReturn = handler }
+    public func shouldReturn(handler: @escaping (_ field: Self) -> Bool) -> Self {
+        return update { $0.shouldReturn = { handler(self) } }
     }
 }
 

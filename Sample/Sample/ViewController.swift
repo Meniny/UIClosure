@@ -9,6 +9,12 @@
 import UIKit
 import UIClosure
 
+//extension UIView {
+//    func doSomething(_ then: (Self) -> Void) {
+//        
+//    }
+//}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var label: UILabel!
@@ -18,15 +24,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         self.label.isUserInteractionEnabled = true
-        self.label.onTap(taps: 1, touches: 1) { (tap) in
-            self.label.text = "self.label.onTap"
+        self.label.onTap(taps: 1, touches: 1) { (tap, l) in
+            l.text = "self.label.onTap"
         }
         
-        self.view.onLongPress() { (longpress) in
+        self.view.onLongPress() { (longpress, _) in
             self.label.text = "self.view.onLongPress"
         }
         
-        self.field.onChange { (text) in
+        self.field.onChange { (text, _) in
             self.label.text = text.isEmpty ? #function : text
         }
     }

@@ -24,6 +24,11 @@
 		641CD9AF201ECB8B00FC9FDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		641CD9B2201ECB8B00FC9FDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		641CD9B4201ECB8B00FC9FDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64D7BDF7202316B400E042B1 /* _config.yml */ = {isa = PBXFileReference; lastKnownFileType = text; name = _config.yml; path = ../_config.yml; sourceTree = "<group>"; };
+		64D7BDF8202316B400E042B1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		64D7BDF9202316B400E042B1 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = LICENSE.md; path = ../LICENSE.md; sourceTree = "<group>"; };
+		64D7BDFA202316B400E042B1 /* UIClosure.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = UIClosure.podspec; path = ../UIClosure.podspec; sourceTree = "<group>"; };
+		64D7BDFB202316B400E042B1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
 		856A499E133D2BB16ED74FF4 /* Pods-Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sample/Pods-Sample.debug.xcconfig"; sourceTree = "<group>"; };
 		F46373149A0165C1ABF7C4C0 /* Pods_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -52,6 +57,11 @@
 		641CD99C201ECB8B00FC9FDF = {
 			isa = PBXGroup;
 			children = (
+				64D7BDF7202316B400E042B1 /* _config.yml */,
+				64D7BDFB202316B400E042B1 /* .gitignore */,
+				64D7BDF9202316B400E042B1 /* LICENSE.md */,
+				64D7BDF8202316B400E042B1 /* README.md */,
+				64D7BDFA202316B400E042B1 /* UIClosure.podspec */,
 				641CD9A7201ECB8B00FC9FDF /* Sample */,
 				641CD9A6201ECB8B00FC9FDF /* Products */,
 				307DF719635C08A091441044 /* Pods */,

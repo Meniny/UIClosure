@@ -1,5 +1,5 @@
 PODS:
-  - UIClosure (1.0.0)
+  - UIClosure (1.0.1)
 
 DEPENDENCIES:
   - UIClosure (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  UIClosure: 93b3cbad26d4c319d7a8fe77bb92133e6c7c7979
+  UIClosure: 8a3bbb2b04562f98ed3966e8ac4fad73280a4430
 
 PODFILE CHECKSUM: 9d9cbbf0ba50adc66e1cc4d8a9163691c6e71132
 

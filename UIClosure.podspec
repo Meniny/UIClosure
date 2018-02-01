@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'UIClosure'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'Time-saving closures for iOS UI elements written in Swift'
 
   s.homepage         = 'https://github.com/Meniny/UIClosure'

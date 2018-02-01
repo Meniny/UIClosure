@@ -59,7 +59,7 @@ extension UITapGestureRecognizer {
     }
 }
 
-extension UIView {
+extension UIAppearance where Self: UIView {
     // MARK: Add Gesture Convenience
     /**
      A convenience method that adds a UITapGestureRecognizer to a view, while also
@@ -97,8 +97,14 @@ extension UIView {
     @discardableResult
     public func onTap(taps: Int = 1,
                       touches: Int = 1,
-                      handler: @escaping (_ gesture: UITapGestureRecognizer) -> Void) -> UITapGestureRecognizer {
-        return self.addTapGesture(tapsRequired: taps, touchesRequired: touches, handler: handler)
+                      handler: @escaping (_ gesture: UITapGestureRecognizer, _ view: Self) -> Void) -> UITapGestureRecognizer {
+        return self.addTapGesture(tapsRequired: taps, touchesRequired: touches, handler: { g in
+            guard let v = g.view as? Self else {
+                handler(g, self)
+                return
+            }
+            handler(g, v)
+        })
     }
 }
 
@@ -127,7 +133,7 @@ extension UILongPressGestureRecognizer {
     }
 }
 
-extension UIView {
+extension UIAppearance where Self: UIView {
     /**
      A convenience method that adds a UILongPressGestureRecognizer to a view, while also
      passing default values to its convenience initializer.
@@ -174,8 +180,14 @@ extension UIView {
                             touches: Int = 1,
                             minDuration: CFTimeInterval = 0.5,
                             allowableMovement: CGFloat = 10,
-                            handler: @escaping (_ gesture: UILongPressGestureRecognizer) -> Void) -> UILongPressGestureRecognizer {
-        return self.addLongPressGesture(tapsRequired: taps, touchesRequired: touches, minDuration: minDuration, allowableMovement: allowableMovement, handler: handler)
+                            handler: @escaping (_ gesture: UILongPressGestureRecognizer, _ view: Self) -> Void) -> UILongPressGestureRecognizer {
+        return self.addLongPressGesture(tapsRequired: taps, touchesRequired: touches, minDuration: minDuration, allowableMovement: allowableMovement, handler: { g in
+            guard let v = g.view as? Self else {
+                handler(g, self)
+                return
+            }
+            handler(g, v)
+        })
     }
 }
 
@@ -192,7 +204,7 @@ extension UIPinchGestureRecognizer {
     }
 }
 
-extension UIView {
+extension UIAppearance where Self: UIView {
     /**
      A convenience method that adds a UIPinchGestureRecognizer to a view, while also
      passing default values to its convenience initializer.
@@ -219,8 +231,14 @@ extension UIView {
      customizations
      */
     @discardableResult
-    public func onPinch(handler: @escaping (_ gesture: UIPinchGestureRecognizer) -> Void) -> UIPinchGestureRecognizer {
-        return self.addPinchGesture(handler: handler)
+    public func onPinch(handler: @escaping (_ gesture: UIPinchGestureRecognizer, _ view: Self) -> Void) -> UIPinchGestureRecognizer {
+        return self.addPinchGesture(handler: { g in
+            guard let v = g.view as? Self else {
+                handler(g, self)
+                return
+            }
+            handler(g, v)
+        })
     }
 }
 
@@ -243,7 +261,7 @@ extension UISwipeGestureRecognizer {
     }
 }
 
-extension UIView {
+extension UIAppearance where Self: UIView {
     /**
      A convenience method that adds a UISwipeGestureRecognizer to a view, while also
      passing default values to its convenience initializer.
@@ -280,8 +298,14 @@ extension UIView {
     @discardableResult
     public func onSwipe(to direction: UISwipeGestureRecognizerDirection = .right,
                         touches: Int = 1,
-                        handler: @escaping (_ gesture: UISwipeGestureRecognizer) -> Void) -> UISwipeGestureRecognizer {
-        return self.addSwipeGesture(direction: direction, touchesRequired: touches, handler: handler)
+                        handler: @escaping (_ gesture: UISwipeGestureRecognizer, _ view: Self) -> Void) -> UISwipeGestureRecognizer {
+        return self.addSwipeGesture(direction: direction, touchesRequired: touches, handler: { g in
+            guard let v = g.view as? Self else {
+                handler(g, self)
+                return
+            }
+            handler(g, v)
+        })
     }
 }
 
@@ -298,7 +322,7 @@ extension UIRotationGestureRecognizer {
     }
 }
 
-extension UIView {
+extension UIAppearance where Self: UIView {
     /**
      A convenience method that adds a UIRotationGestureRecognizer to a view, while also
      passing default values to its convenience initializer.
@@ -325,8 +349,14 @@ extension UIView {
      customizations
      */
     @discardableResult
-    public func onRotation(handler: @escaping (_ gesture: UIRotationGestureRecognizer) -> Void) -> UIRotationGestureRecognizer {
-        return self.addRotationGesture(handler: handler)
+    public func onRotation(handler: @escaping (_ gesture: UIRotationGestureRecognizer, _ view: Self) -> Void) -> UIRotationGestureRecognizer {
+        return self.addRotationGesture(handler: { g in
+            guard let v = g.view as? Self else {
+                handler(g, self)
+                return
+            }
+            handler(g, v)
+        })
     }
 }
 
@@ -349,7 +379,7 @@ extension UIPanGestureRecognizer {
     }
 }
 
-extension UIView {
+extension UIAppearance where Self: UIView {
     /**
      A convenience method that adds a UIPanGestureRecognizer to a view, while also
      passing default values to its convenience initializer.
@@ -386,8 +416,14 @@ extension UIView {
     @discardableResult
     public func onPan(minTouches: Int = 1,
                       maxTouches: Int = .max,
-                      handler: @escaping (_ gesture: UIPanGestureRecognizer) -> Void) -> UIPanGestureRecognizer {
-        return self.addPanGesture(minTouches: minTouches, maxTouches: maxTouches, handler: handler)
+                      handler: @escaping (_ gesture: UIPanGestureRecognizer, _ view: Self) -> Void) -> UIPanGestureRecognizer {
+        return self.addPanGesture(minTouches: minTouches, maxTouches: maxTouches, handler: { g in
+            guard let v = g.view as? Self else {
+                handler(g, self)
+                return
+            }
+            handler(g, v)
+        })
     }
 }
 
@@ -407,7 +443,7 @@ extension UIScreenEdgePanGestureRecognizer {
     }
 }
 
-extension UIView {
+extension UIAppearance where Self: UIView {
     /**
      A convenience method that adds a UIScreenEdgePanGestureRecognizer to a view, while also
      passing default values to its convenience initializer.
@@ -439,8 +475,14 @@ extension UIView {
      */
     @discardableResult
     public func onPanFromScreenEdges(_ edges: UIRectEdge = .all,
-                                     handler: @escaping (_ gesture: UIScreenEdgePanGestureRecognizer) -> Void) -> UIScreenEdgePanGestureRecognizer {
-        return self.addScreenEdgePanGesture(edges: edges, handler: handler)
+                                     handler: @escaping (_ gesture: UIScreenEdgePanGestureRecognizer, _ view: Self) -> Void) -> UIScreenEdgePanGestureRecognizer {
+        return self.addScreenEdgePanGesture(edges: edges, handler: { g in
+            guard let v = g.view as? Self else {
+                handler(g, self)
+                return
+            }
+            handler(g, v)
+        })
     }
 }
 

@@ -4,7 +4,7 @@ import UIKit
 /// :nodoc:
 private let jzyBug = 0 // Prevent the license header from showing up in Jazzy Docs for UICollectionView
 
-public extension UIBarButtonItem {
+public extension UIAppearance where Self: UIBarButtonItem {
     /**
      A convenience initializer for a UIBarButtonItem so that the tap event can
      be handled with a closure. This is equivalent of using the init(image:style:target:action:)
@@ -14,7 +14,7 @@ public extension UIBarButtonItem {
      * parameter style: The `UIBarButtonItemStyle` of the button
      * parameter handler: The closure that is called when the button is tapped
      */
-    public convenience init(image: UIImage?, style: UIBarButtonItemStyle, handler: @escaping () -> Void) {
+    public init(image: UIImage?, style: UIBarButtonItemStyle, handler: @escaping (_ item: Self) -> Void) {
         self.init(image: image, style: style, target: nil, action: nil)
         onTap(handler: handler)
     }
@@ -30,7 +30,7 @@ public extension UIBarButtonItem {
      * parameter handler: The closure that is called when the button is tapped
      */
     @available(iOS 5.0, *)
-    public convenience init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItemStyle, handler: @escaping () -> Void) {
+    public init(image: UIImage?, landscapeImagePhone: UIImage?, style: UIBarButtonItemStyle, handler: @escaping (_ item: Self) -> Void) {
         self.init(image: image, landscapeImagePhone: landscapeImagePhone, style: style, target: nil, action: nil)
         onTap(handler: handler)
     }
@@ -44,7 +44,7 @@ public extension UIBarButtonItem {
      * parameter style: The `UIBarButtonItemStyle` of the button
      * parameter handler: The closure that is called when the button is tapped
      */
-    public convenience init(title: String?, style: UIBarButtonItemStyle, handler: @escaping () -> Void) {
+    public init(title: String?, style: UIBarButtonItemStyle, handler: @escaping (_ item: Self) -> Void) {
         self.init(title: title, style: style, target: nil, action: nil)
         onTap(handler: handler)
     }
@@ -57,7 +57,7 @@ public extension UIBarButtonItem {
      * parameter barButtonSystemItem: The `UIBarButtonSystemItem` to be used for the button
      * parameter handler: The closure that is called when the button is tapped
      */
-    public convenience init(barButtonSystemItem systemItem: UIBarButtonSystemItem, handler: @escaping () -> Void) {
+    public init(barButtonSystemItem systemItem: UIBarButtonSystemItem, handler: @escaping (_ item: Self) -> Void) {
         self.init(barButtonSystemItem: systemItem, target: nil, action: nil)
         onTap(handler: handler)
     }
@@ -79,11 +79,11 @@ public extension UIBarButtonItem {
      
      * parameter handler: The closure that will be called when the tap is recognized.
      */
-    public func onTap(handler: @escaping () -> Void) {
+    public func onTap(handler: @escaping (_ item: Self) -> Void) {
         target = self
         action = #selector(UIBarButtonItem.buttonTapped)
         NotificationCenter.selfObserve(name: .barButtonItemTapped, target: self) { button, userInfo in
-            handler()
+            handler(button)
         }
     }
 }

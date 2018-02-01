@@ -58,12 +58,8 @@ extension _KeyValueCodingAndObserving {
      * returns: The observer object needed to remove observation
      */
     @discardableResult
-    public func observe<Value>(
-        _ keyPath: KeyPath<Self, Value>,
-        options: NSKeyValueObservingOptions = [],
-        until removeCondition: @escaping (Self) -> Bool,
-        changeHandler: @escaping (Self, NSKeyValueObservedChange<Value>) -> Void)
-        -> NSKeyValueObservation {
+    public func observe<Value>(_ keyPath: KeyPath<Self, Value>, options: NSKeyValueObservingOptions = [], until removeCondition: @escaping (Self) -> Bool,
+        changeHandler: @escaping (Self, NSKeyValueObservedChange<Value>) -> Void) -> NSKeyValueObservation {
             var observer: NSKeyValueObservation?
             observer = self.observe(keyPath, options: options) { obj, change in
                 guard !removeCondition(obj) else {

@@ -82,9 +82,7 @@ extension NotificationCenter {
         NotificationCenter.closures.selfObserve(name: name, target: target, closure: closure)
     }
     
-    func selfObserve<T>(name: Notification.Name,
-                        target: T,
-                        closure: @escaping (_ target: T, _ userInfo: [AnyHashable : Any]?) -> Void) where T: AnyObject {
+    func selfObserve<T>(name: Notification.Name, target: T, closure: @escaping (_ target: T, _ userInfo: [AnyHashable : Any]?) -> Void) where T: AnyObject {
         
         // Post a cleanup notification to remove any duplicates
         let cleanupKey = "com.vhesener.notificationkey.selfobserved.cleanup"
